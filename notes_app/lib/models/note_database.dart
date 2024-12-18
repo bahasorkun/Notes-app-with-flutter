@@ -18,10 +18,21 @@ class NoteDatabase {
 
   // C R E A T E - a note and save to db
   Future<void> addNote(String text) async {
-    final newNote = Note()..text =text;
+    // create a new note object
+    final newNote = Note()..text = text;
+
+    // save to db
+    await isar.writeTxn(
+      () => isar.notes.put(newNote),
+    );
+
+    // re-read from db
+    fetchNotes();
   }
 
   // R E A D - notes from db
+
+  Future<void> fetchNotes() async {}
 
   // U P D A T E - a note in db
 
